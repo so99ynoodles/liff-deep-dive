@@ -58,7 +58,7 @@ const useLiff = () => {
     liff.init({
       liffId: import.meta.env.VITE_LIFF_ID
     });
-  });
+  }, []);
 };
 
 export default useLiff;
