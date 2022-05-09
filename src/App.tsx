@@ -6,11 +6,11 @@ function App() {
   useLiff();
 
   const handleShare = () => {
-    (liff as any).$deepdive.shareMessages();
+    liff.$deepdive.shareMessages();
   };
 
   const handleScan = () => {
-    (liff as any).$deepdive.readQrCode();
+    liff.$deepdive.readQrCode();
   };
 
   return (
