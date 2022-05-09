@@ -1,6 +1,18 @@
 import { useEffect } from "react";
 import liff, { LiffPluginContext } from "@line/liff";
 
+interface ShareTargetPickerResult {
+  status: "success";
+}
+declare module "@line/liff" {
+  interface Liff {
+    $deepdive: {
+      shareMessages: () => Promise<ShareTargetPickerResult | void>;
+      readQrCode: () => Promise<void>;
+    };
+  }
+}
+
 class DeepDivePlugin {
   name: string;
   constructor() {
@@ -18,12 +30,11 @@ class DeepDivePlugin {
   initAfter() {
     if (!liff.isLoggedIn()) {
       liff.login();
-      return Promise.resolve();
     }
     return Promise.resolve();
   }
 
-  shareMessages() {
+  shareMessages(): Promise<ShareTargetPickerResult | void> {
     if (liff.isApiAvailable("shareTargetPicker")) {
       return liff.shareTargetPicker(
         [
@@ -40,14 +51,15 @@ class DeepDivePlugin {
     return Promise.reject();
   }
 
-  readQrCode() {
+  readQrCode(): Promise<void> {
     if (liff.isApiAvailable("scanCodeV2")) {
-      liff.scanCodeV2().then((result) => {
+      return liff.scanCodeV2().then((result) => {
         if (result.value) {
           location.href = result.value;
         }
       });
     }
+    return Promise.reject();
   }
 }
 
