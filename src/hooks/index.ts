@@ -11,7 +11,7 @@ class DeepDivePlugin {
     context.hooks.init.after(this.initAfter);
     return {
       shareMessages: this.shareMessages,
-      readQrCode: this.readQrCode
+      readQrCode: this.readQrCode,
     };
   }
 
@@ -29,11 +29,11 @@ class DeepDivePlugin {
         [
           {
             type: "text",
-            text: "https://linedevelopercommunity.connpass.com/event/242678/"
-          }
+            text: "https://linedevelopercommunity.connpass.com/event/242678/",
+          },
         ],
         {
-          isMultiple: true
+          isMultiple: true,
         }
       );
     }
@@ -42,11 +42,11 @@ class DeepDivePlugin {
 
   readQrCode() {
     if (liff.isApiAvailable("scanCodeV2")) {
-      liff.scanCodeV2().then(result => {
+      liff.scanCodeV2().then((result) => {
         if (result.value) {
           location.href = result.value;
         }
-      })
+      });
     }
   }
 }
@@ -56,7 +56,7 @@ liff.use(new DeepDivePlugin());
 const useLiff = () => {
   useEffect(() => {
     liff.init({
-      liffId: import.meta.env.VITE_LIFF_ID
+      liffId: import.meta.env.VITE_LIFF_ID,
     });
   }, []);
 };
