@@ -1,19 +1,7 @@
-import { useEffect } from "react";
 import liff, { LiffPluginContext } from "@line/liff";
+import { ShareTargetPickerResult } from "../types";
 
-interface ShareTargetPickerResult {
-  status: 'success';
-}
-declare module '@line/liff' {
-  interface Liff {
-    $deepdive: {
-      shareMessages: () => Promise<ShareTargetPickerResult | void>,
-      readQrCode: () => Promise<void>
-    };
-  }
-}
-
-class DeepDivePlugin {
+export class DeepDivePlugin {
   name: string;
   constructor() {
     this.name = "deepdive";
@@ -23,7 +11,7 @@ class DeepDivePlugin {
     context.hooks.init.after(this.initAfter);
     return {
       shareMessages: this.shareMessages,
-      readQrCode: this.readQrCode
+      readQrCode: this.readQrCode,
     };
   }
 
@@ -40,11 +28,11 @@ class DeepDivePlugin {
         [
           {
             type: "text",
-            text: "https://linedevelopercommunity.connpass.com/event/242678/"
-          }
+            text: "https://linedevelopercommunity.connpass.com/event/242678/",
+          },
         ],
         {
-          isMultiple: true
+          isMultiple: true,
         }
       );
     }
@@ -53,24 +41,12 @@ class DeepDivePlugin {
 
   readQrCode(): Promise<void> {
     if (liff.isApiAvailable("scanCodeV2")) {
-      return liff.scanCodeV2().then(result => {
+      return liff.scanCodeV2().then((result) => {
         if (result.value) {
           location.href = result.value;
         }
-      })
+      });
     }
     return Promise.reject();
   }
 }
-
-liff.use(new DeepDivePlugin());
-
-const useLiff = () => {
-  useEffect(() => {
-    liff.init({
-      liffId: import.meta.env.VITE_LIFF_ID
-    });
-  }, []);
-};
-
-export default useLiff;

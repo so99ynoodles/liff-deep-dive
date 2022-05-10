@@ -1,5 +1,6 @@
 import liff from "@line/liff";
-import useLiff from "./hooks";
+import { useLiff } from "./hooks/useLiff";
+
 import "./index.css";
 
 function App() {
