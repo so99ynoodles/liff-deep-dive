@@ -6,12 +6,24 @@ import "./index.css";
 function App() {
   useLiff();
 
-  const handleShare = () => {
-    liff.$deepdive.shareMessages();
+  const handleShare = async () => {
+    try {
+      const res = await liff.$deepdive.shareMessages();
+      if (res) {
+        console.log("liff.$deepdive.shareMessage succeeded!", res);
+      }
+    } catch (e) {
+      console.error("liff.$deepdive.shareMessage was failed", e);
+    }
   };
 
-  const handleScan = () => {
-    liff.$deepdive.readQrCode();
+  const handleScan = async () => {
+    try {
+      await liff.$deepdive.readQrCode();
+      console.log("liff.$deepdive.readQrCode succeeded!");
+    } catch (e) {
+      console.error("liff.$deepdive.readQrCode was failed", e);
+    }
   };
 
   return (
