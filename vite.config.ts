@@ -10,10 +10,13 @@ export default defineConfig(({ mode }) => {
       server: {
         https: {
           key: fs.readFileSync("./localhost-key.pem"),
-          cert: fs.readFileSync("./localhost.pem")
-        }
-      }
-    }
+          cert: fs.readFileSync("./localhost.pem"),
+        },
+      },
+      test: {
+        environment: "jsdom",
+      },
+    };
   }
   return {
     plugins: [react()],
