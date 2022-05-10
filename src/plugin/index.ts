@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import liff, { LiffPluginContext } from "@line/liff";
 import { ShareTargetPickerResult } from "../types";
 
-class DeepDivePlugin {
+export class DeepDivePlugin {
   name: string;
   constructor() {
     this.name = "deepdive";
@@ -51,15 +50,3 @@ class DeepDivePlugin {
     return Promise.reject();
   }
 }
-
-liff.use(new DeepDivePlugin());
-
-const useLiff = () => {
-  useEffect(() => {
-    liff.init({
-      liffId: import.meta.env.VITE_LIFF_ID,
-    });
-  }, []);
-};
-
-export default useLiff;
