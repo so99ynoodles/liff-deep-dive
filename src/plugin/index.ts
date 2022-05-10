@@ -36,7 +36,7 @@ export class DeepDivePlugin {
         }
       );
     }
-    return Promise.reject();
+    return Promise.reject(new Error("shareTargetPicker API is unavailable"));
   }
 
   readQrCode(): Promise<void> {
@@ -47,6 +47,6 @@ export class DeepDivePlugin {
         }
       });
     }
-    return Promise.reject();
+    return Promise.reject(new Error("scanCodeV2 API is unavailable"));
   }
 }
