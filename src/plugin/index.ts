@@ -42,6 +42,7 @@ export class DeepDivePlugin {
   readQrCode(): Promise<void> {
     if (liff.isApiAvailable("scanCodeV2")) {
       return liff.scanCodeV2().then((result) => {
+        console.log("liff.scanCodeV2 succeeded", result);
         if (result.value) {
           location.href = result.value;
         }
