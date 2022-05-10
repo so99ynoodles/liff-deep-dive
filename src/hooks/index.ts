@@ -1,17 +1,6 @@
 import { useEffect } from "react";
 import liff, { LiffPluginContext } from "@line/liff";
-
-interface ShareTargetPickerResult {
-  status: "success";
-}
-declare module "@line/liff" {
-  interface Liff {
-    $deepdive: {
-      shareMessages: () => Promise<ShareTargetPickerResult | void>;
-      readQrCode: () => Promise<void>;
-    };
-  }
-}
+import { ShareTargetPickerResult } from "../types";
 
 class DeepDivePlugin {
   name: string;
