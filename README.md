@@ -21,6 +21,5 @@ Demo app for the [LIFF Deep Dive event](https://linedevelopercommunity.connpass.
         key: fs.readFileSync("./localhost-key.pem"),
         cert: fs.readFileSync("./localhost.pem")
     }
-    }
 }
 ```
