@@ -1,4 +1,5 @@
 import liff from "@line/liff";
+import { saveAs } from "file-saver";
 import { useLiff } from "./hooks/useLiff";
 
 import "./index.css";
@@ -26,6 +27,11 @@ function App() {
     }
   };
 
+  const handleFileSave = () => {
+    const blob = new Blob(['liffをよろしくお願いいたします！'], {type: 'text/plain'});
+    saveAs(blob, 'liff.txt');
+  }
+
   return (
     <div className="py-16 px-4 flex justify-center items-center flex-col h-full">
       <h1 className="text-3xl font-bold text-center text-white mb-16">
@@ -38,10 +44,16 @@ function App() {
         LINEで友達にシェア
       </button>
       <button
-        className="mx-auto relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+        className="mb-4 mx-auto relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
         onClick={handleScan}
       >
         QRスキャンしてアンケートに回答
+      </button>
+      <button
+        className="mx-auto relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+        onClick={handleFileSave}
+      >
+        ファイルをダウンロード
       </button>
     </div>
   );
