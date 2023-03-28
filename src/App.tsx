@@ -1,5 +1,4 @@
 import liff from "@line/liff";
-import { saveAs } from "file-saver";
 import { useLiff } from "./hooks/useLiff";
 
 import "./index.css";
@@ -28,9 +27,11 @@ function App() {
   };
 
   const handleFileSave = () => {
-    const blob = new Blob(['liffをよろしくお願いいたします！'], {type: 'text/plain'});
-    saveAs(blob, 'liff.txt');
-  }
+    liff.openWindow({
+      url: "https://www.africau.edu/images/default/sample.pdf",
+      external: true,
+    });
+  };
 
   return (
     <div className="py-16 px-4 flex justify-center items-center flex-col h-full">
